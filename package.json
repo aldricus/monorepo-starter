@@ -1,0 +1,30 @@
+{
+  "name": "monorepo-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend-nuxt": "pnpm --filter frontend-nuxt dev",
+    "dev:frontend-rsbuild": "pnpm --filter frontend-vue-rsbuild dev",
+    "dev": "pnpm run db:start && concurrently \"pnpm dev:backend\" \"pnpm dev:frontend-nuxt\"",
+    "build:backend": "pnpm --filter backend build",
+    "build:frontend-nuxt": "pnpm --filter frontend-nuxt build",
+    "build:frontend-rsbuild": "pnpm --filter frontend-vue-rsbuild build",
+    "build": "pnpm --parallel --filter \"./packages/**\" build",
+    "lint": "pnpm --parallel --filter \"./packages/**\" lint",
+    "test": "pnpm --parallel --filter \"./packages/**\" test",
+    "db:start": "docker-compose up -d postgres",
+    "db:stop": "docker-compose stop postgres",
+    "db:rm": "docker-compose rm -fsv postgres && docker volume rm monorepo-starter_postgres_data",
+    "clean": "pnpm --parallel --filter \"./packages/**\" run clean && rm -rf node_modules && pnpm store prune"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0"
+}
