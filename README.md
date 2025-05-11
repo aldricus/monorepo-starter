@@ -1,4 +1,4 @@
-# Fullstack minimal starter monorepo
+# Minimal fullstack monorepo starter
 
 ## Stack:
 
